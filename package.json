@@ -1,0 +1,9 @@
+{
+  "name": "core-ts",
+  "description": "Essential JS/TS Packages for Our Work at Destacks.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Alexis Michaltsis",
+  "license": "MIT"
+}

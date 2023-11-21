@@ -1,2 +1,3 @@
 # core-ts
-Essential JS/Ts Packages for Our Work
+
+Essential JS/TS Packages for Our Work at Destacks.

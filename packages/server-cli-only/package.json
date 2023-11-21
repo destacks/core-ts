@@ -1,0 +1,32 @@
+{
+  "name": "server-cli-only",
+  "version": "0.1.1",
+  "description": "The server-cli-only package is designed to restrict the import of modules exclusively to Next.js server components or scripts running in a CLI environment.",
+  "main": "dist/server-cli-only.js",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "nextjs",
+    "next",
+    "react",
+    "server-only",
+    "cli-only",
+    "cli",
+    "server"
+  ],
+  "author": "Alexis Michaltsis",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.9.3",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "server-only": "^0.0.1"
+  }
+}
