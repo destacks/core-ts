@@ -1,6 +1,6 @@
 {
   "name": "server-cli-only",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The server-cli-only package is designed to restrict the import of modules exclusively to Next.js server components or scripts running in a CLI environment.",
   "main": "dist/server-cli-only.js",
   "files": [

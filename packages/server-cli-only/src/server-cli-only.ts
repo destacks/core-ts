@@ -11,7 +11,7 @@
  *
  * License: MIT.
  *
- * More info: https://github.com/destacks/core-ts/packages/server-cli-only
+ * More info: https://github.com/destacks/core-ts/tree/main/packages/server-cli-only
  */
 
 // Function to check if it's a Next.js server component

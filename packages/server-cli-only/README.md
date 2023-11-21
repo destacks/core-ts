@@ -50,6 +50,8 @@ IMPORTANT: Setting RUNNING_IN_CLI=true allows the module to be imported from any
 
 MIT License.
 
-## Project Page
+## Links
 
-https://github.com/destacks/core-ts/packages/server-cli-only
+- Source Code: https://github.com/destacks/core-ts/tree/main/packages/server-cli-only
+- Project Repo: https://github.com/destacks/core-ts
+- NPM Package: https://www.npmjs.com/package/server-cli-only
