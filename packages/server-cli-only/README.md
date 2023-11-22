@@ -1,6 +1,6 @@
 # server-cli-only
 
-The `server-cli-only` package is designed to restrict the import of modules exclusively to Next.js server components or scripts running in a CLI environment. It builds on the `server-only` package used by Next.js on build-time.
+The `server-cli-only` package is designed to restrict the import of modules exclusively to React Server Components or scripts running on the CLI.
 
 ## Installation
 
@@ -18,7 +18,7 @@ import "server-cli-only";
 
 ## CLI Usage
 
-To use this package in a CLI script, set the RUNNING_IN_CLI environment variable to true. This can be done inline when running your script:
+To use this package in a CLI script, in addition to `import "server-cli-only"`, set the `RUNNING_IN_CLI` environment variable to `true`. Setting the environment variable can be done inline when running your script directly from the terminal:
 
 ```bash
 RUNNING_IN_CLI=true node your-script.js
@@ -36,15 +36,13 @@ Or using a package.json script:
 
 ## How It Works
 
-The package contains logic to determine the execution context and throws an error if the current environment is not a Next.js server component or a CLI environment.
+The `server-cli-only` package is tailored for React Server Components and CLI environments, safeguarding against its inclusion in client-side components.
 
-- It checks if it's a Next.js server component by trying to require a `server-only` module.
-- It checks for a CLI environment by looking for the RUNNING_IN_CLI environment variable.
-- If neither a server component nor a CLI environment is detected, an error is thrown to prevent usage in Next.js client
+- **React Server Environments:** Utilizes an empty module (`./empty.js`) in environments specified by the `"react-server"` environment. For more details, see [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md).
+- **CLI Environments:** In Node.js contexts (`"node"` in `"default"` export environments), it checks if `RUNNING_ON_CLI` is set to `"true"`. If not, it throws an error, guiding for correct CLI usage.
+- **Client Component Environments:** In browser contexts (`"browser"` in `"default"` export environments), `./index.js` throws an error to always prevent usage in client-side rendering.
 
-## Caution
-
-IMPORTANT: Setting RUNNING_IN_CLI=true allows the module to be imported from any environment. Use this feature only if you understand the implications and ensure that it's not set in a client-side context to avoid unintended behaviors.
+This configuration tries to align with the guidelines in the React Server Module Conventions of [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md) but slightly extends them to enable script use on the CLI.
 
 ## License
 

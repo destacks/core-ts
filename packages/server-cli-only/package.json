@@ -1,16 +1,9 @@
 {
   "name": "server-cli-only",
-  "version": "0.1.2",
-  "description": "The server-cli-only package is designed to restrict the import of modules exclusively to Next.js server components or scripts running in a CLI environment.",
-  "main": "dist/server-cli-only.js",
-  "files": [
-    "dist/",
-    "README.md",
-    "LICENSE"
-  ],
-  "scripts": {
-    "build": "tsc"
-  },
+  "version": "0.2.0",
+  "description": "The server-cli-only package is designed to restrict the import of modules exclusively to React Server Components or scripts running on the CLI.",
+  "homepage": "https://www.destacks.com/",
+  "bugs": "https://github.com/destacks/core-ts/issues",
   "keywords": [
     "nextjs",
     "next",
@@ -22,11 +15,19 @@
   ],
   "author": "Alexis Michaltsis",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^20.9.3",
-    "typescript": "^5.3.2"
-  },
-  "dependencies": {
-    "server-only": "^0.0.1"
+  "files": [
+    "index.js",
+    "empty.js",
+    "cli.js"
+  ],
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "react-server": "./empty.js",
+      "default": {
+        "browser": "./index.js",
+        "node": "./cli.js"
+      }
+    }
   }
 }
