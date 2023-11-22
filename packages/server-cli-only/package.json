@@ -1,6 +1,6 @@
 {
   "name": "server-cli-only",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "The server-cli-only package is designed to restrict the import of modules exclusively to React Server Components or scripts running on the CLI.",
   "homepage": "https://www.destacks.com/",
   "bugs": "https://github.com/destacks/core-ts/issues",

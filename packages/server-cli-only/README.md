@@ -1,6 +1,6 @@
 # server-cli-only
 
-The `server-cli-only` package is designed to restrict the import of modules exclusively to React Server Components or scripts running on the CLI.
+The `server-cli-only` package is designed to restrict the import of modules exclusively to React Server Components or scripts running in the CLI. This package is an alternative to the `server-only` package, which does not permit the execution of scripts that use modules importing its directive.
 
 ## Installation
 
@@ -39,7 +39,7 @@ Or using a package.json script:
 The `server-cli-only` package is tailored for React Server Components and CLI environments, safeguarding against its inclusion in client-side components.
 
 - **React Server Environments:** Utilizes an empty module (`./empty.js`) in environments specified by the `"react-server"` environment. For more details, see [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md).
-- **CLI Environments:** In Node.js contexts (`"node"` in `"default"` export environments), it checks if `RUNNING_ON_CLI` is set to `"true"`. If not, it throws an error, guiding for correct CLI usage.
+- **CLI Environments:** In Node.js contexts (`"node"` in `"default"` export environments), it checks if `RUNNING_IN_CLI` is set to `"true"`. If not, it throws an error, guiding for correct CLI usage.
 - **Client Component Environments:** In browser contexts (`"browser"` in `"default"` export environments), `./index.js` throws an error to always prevent usage in client-side rendering.
 
 This configuration tries to align with the guidelines in the React Server Module Conventions of [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md) but slightly extends them to enable script use on the CLI.
