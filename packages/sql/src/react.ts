@@ -5,5 +5,5 @@ import {
   ResultSet,
   SqlExecutor,
   SqlFunction,
-} from "./index";
+} from "./index.js";
 export { createClient, createSql, ResultSet, SqlExecutor, SqlFunction };

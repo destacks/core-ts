@@ -1,6 +1,6 @@
 function importReactModules() {
   if (process.env.RUNNING_IN_CLI === "true") {
-    return import("./react").then(({ createClient, createSql }) => {
+    return import("../dist/react.js").then(({ createClient, createSql }) => {
       console.log("Can be imported:", createClient.name, createSql.name);
     });
   } else {

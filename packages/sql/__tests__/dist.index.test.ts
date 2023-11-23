@@ -1,6 +1,6 @@
 import { Client, InStatement, ResultSet } from "@libsql/client";
 import { z } from "zod";
-import { SqlFunction, createSql } from "./index";
+import { SqlFunction, createSql } from "../dist/index.js";
 import { jest, describe, beforeEach, it, expect } from "@jest/globals";
 
 describe("sql function in Node.js environment", () => {
