@@ -1,8 +1,8 @@
 {
   "name": "server-cli-only",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "The server-cli-only package is designed to restrict the import of modules exclusively to React Server Components or scripts running on the CLI.",
-  "homepage": "https://www.destacks.com/",
+  "homepage": "https://github.com/destacks/core-ts/tree/main/packages/server-cli-only",
   "bugs": "https://github.com/destacks/core-ts/issues",
   "keywords": [
     "nextjs",
