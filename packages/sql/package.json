@@ -1,6 +1,6 @@
 {
   "name": "@destacks/sql",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple SQL Querying Using Template Literals With Optional Zod Schema Validation",
   "keywords": [
     "database",
@@ -30,7 +30,7 @@
   "author": "Alexis Michaltsis",
   "license": "MIT",
   "dependencies": {
-    "@libsql/client": "0.4.0-pre.2",
+    "@libsql/client": "^0.3.6",
     "server-cli-only": "^0.2.2",
     "sql-template-tag": "^5.1.0",
     "zod": "^3.22.4"
