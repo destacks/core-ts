@@ -1,0 +1,43 @@
+{
+  "name": "@destacks/sql",
+  "version": "0.1.0",
+  "description": "Simple SQL Querying Using Template Literals With Optional Zod Schema Validation",
+  "keywords": [
+    "database",
+    "sql",
+    "template literals",
+    "sqlite",
+    "libsql",
+    "turso"
+  ],
+  "homepage": "https://github.com/destacks/core-ts/tree/main/packages/sql",
+  "bugs": "https://github.com/destacks/core-ts/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/destacks/core-ts.git"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "author": "Alexis Michaltsis",
+  "license": "MIT",
+  "dependencies": {
+    "@libsql/client": "0.4.0-pre.2",
+    "server-cli-only": "^0.2.2",
+    "sql-template-tag": "^5.1.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.10",
+    "@types/node": "^20.9.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.2"
+  }
+}
