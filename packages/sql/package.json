@@ -14,7 +14,7 @@
   "bugs": "https://github.com/destacks/core-ts/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/destacks/core-ts.git"
+    "url": "git+https://github.com/destacks/core-ts.git"
   },
   "main": "dist/index.js",
   "files": [
@@ -23,6 +23,9 @@
   "scripts": {
     "build": "tsc",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Alexis Michaltsis",
   "license": "MIT",
