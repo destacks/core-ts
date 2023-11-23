@@ -1,6 +1,6 @@
 {
   "name": "@destacks/sql",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Simple SQL Querying Using Template Literals With Optional Zod Schema Validation",
   "keywords": [
     "database",

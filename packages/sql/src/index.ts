@@ -71,17 +71,17 @@ function createSql(client: Client): SqlFunction {
   } as SqlFunction;
 }
 
-async function execute<T>(
+function execute<T>(
   client: Client,
   strings: TemplateStringsArray,
   ...values: Value[]
 ) {
   const query = sqlTemplate(strings, ...values);
-  const resultSet = await client.execute({
+  const resultSet = client.execute({
     sql: query.sql,
     args: query.values as InArgs,
   } as InStatement);
-  return resultSet as ResultSet<T>;
+  return resultSet as Promise<ResultSet<T>>;
 }
 
 function validate(schema: ZodSchema, resultSet: ResultSet<Value>) {
