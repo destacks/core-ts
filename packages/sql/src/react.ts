@@ -6,4 +6,5 @@ import {
   SqlExecutor,
   SqlFunction,
 } from "./index.js";
-export { createClient, createSql, ResultSet, SqlExecutor, SqlFunction };
+export { createClient, createSql };
+export type { SqlFunction, SqlExecutor, ResultSet };

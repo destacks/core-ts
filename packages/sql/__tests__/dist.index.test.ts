@@ -1,6 +1,6 @@
 import { Client, InStatement, ResultSet } from "@libsql/client";
 import { z } from "zod";
-import { SqlFunction, createSql } from "../dist/index.js";
+import { createSql } from "../dist/index.js";
 import { jest, describe, beforeEach, it, expect } from "@jest/globals";
 
 describe("sql function in Node.js environment", () => {
@@ -8,7 +8,7 @@ describe("sql function in Node.js environment", () => {
     (stmt: InStatement) => Promise<ResultSet>
   >;
   let mockClient: Client;
-  let sql: SqlFunction;
+  let sql: any;
 
   beforeEach(() => {
     mockExecute = jest.fn();
@@ -45,28 +45,32 @@ describe("sql function in Node.js environment", () => {
 
   it("executes a simple query", async () => {
     mockExecute.mockResolvedValue(mockResponse);
-    const query = sql`SELECT * FROM users WHERE id = ${uuid}`;
-    await expect(query).resolves.toEqual(mockResponse);
+    await expect(sql`SELECT * FROM users WHERE id = ${uuid}`).resolves.toEqual(
+      mockResponse
+    );
   });
 
   it("handles query errors", async () => {
     mockExecute.mockRejectedValue(new Error("Query failed"));
-    const query = sql`SELECT * FROM users WHERE id = ${uuid}`;
-    await expect(query).rejects.toThrow("Query failed");
+    await expect(sql`SELECT * FROM users WHERE id = ${uuid}`).rejects.toThrow(
+      "Query failed"
+    );
   });
 
   it("validates results against correct Zod schema", async () => {
     const UserSchema = z.object({ id: z.string(), name: z.string() });
     mockExecute.mockResolvedValue(mockResponse);
-    const query = sql(UserSchema)`SELECT * FROM users WHERE id = ${uuid}`;
-    await expect(query).resolves.toEqual(mockResponse);
+    await expect(
+      sql(UserSchema)`SELECT * FROM users WHERE id = ${uuid}`
+    ).resolves.toEqual(mockResponse);
   });
 
   it("Throws error because of wrong Zod schema", async () => {
     const FaultySchema = z.object({ foo: z.string(), bar: z.string() });
     mockExecute.mockResolvedValue(mockResponse);
-    const query = sql(FaultySchema)`SELECT * FROM users WHERE id = ${uuid}`;
-    await expect(query).rejects.toThrowError(
+    await expect(
+      sql(FaultySchema)`SELECT * FROM users WHERE id = ${uuid}`
+    ).rejects.toThrowError(
       "Schema validation failed: foo (Required), bar (Required)"
     );
   });

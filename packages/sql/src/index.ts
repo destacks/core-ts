@@ -1,22 +1,21 @@
-import { ZodSchema, z } from "zod";
+import { ZodSchema } from "zod";
 import {
   createClient,
   Client,
   ResultSet as _ResultSet,
-  InArgs,
-  InStatement,
   Value,
+  InArgs,
 } from "@libsql/client";
 import sqlTemplate from "sql-template-tag";
 
-export type ResultSet<T> = Omit<_ResultSet, "rows"> & { rows: T[] };
+type ResultSet<T> = Omit<_ResultSet, "rows"> & { rows: T[] };
 
-export type SqlExecutor<T> = (
+type SqlExecutor<T> = (
   strings: TemplateStringsArray,
   ...values: Value[]
 ) => Promise<ResultSet<T>>;
 
-export type SqlFunction = {
+type SqlFunction = {
   <T>(schema: ZodSchema<T>): SqlExecutor<T>;
   <T>(strings: TemplateStringsArray, ...values: Value[]): Promise<ResultSet<T>>;
 };
@@ -26,8 +25,8 @@ export type SqlFunction = {
  * Applicable for Node.js backend or React projects. Use `@destacks/sql` for Node.js and
  * `@destacks/sql/react` for React, integrated with `server-cli-only`.
  *
- * @param {Client} client - The database client for executing queries.
- * @returns {SqlFunction} A function for executing SQL queries, optionally with Zod validation.
+ * @param client The database client for executing queries.
+ * @returns A function for executing SQL queries, optionally with Zod validation.
  *
  * Example:
  * ```typescript
@@ -48,43 +47,51 @@ export type SqlFunction = {
  * React & `server-cli-only`: {@link https://www.npmjs.com/package/server-cli-only}
  */
 function createSql(client: Client): SqlFunction {
-  return function (
-    schemaOrStrings: ZodSchema | TemplateStringsArray,
+  return function <T>(
+    schemaOrStrings: ZodSchema<T> | TemplateStringsArray,
     ...values: Value[]
-  ) {
+  ): SqlExecutor<T> | Promise<ResultSet<T>> {
     if (schemaOrStrings instanceof ZodSchema) {
-      const schema = schemaOrStrings;
-      type inferredType = z.infer<typeof schema>;
-      return async (strings: TemplateStringsArray, ...values: Value[]) => {
-        const resultSet = await execute<inferredType>(
-          client,
-          strings,
-          ...values
-        );
-        validate(schema, resultSet);
-        return resultSet;
-      };
+      return (strings, ...values) =>
+        executeWithSchema(client, schemaOrStrings, strings, ...values);
     } else {
-      const strings = schemaOrStrings;
-      return execute(client, strings, ...values);
+      return execute(client, schemaOrStrings, ...values);
     }
   } as SqlFunction;
 }
 
-function execute<T>(
+async function execute<T>(
   client: Client,
   strings: TemplateStringsArray,
   ...values: Value[]
-) {
+): Promise<ResultSet<T>> {
   const query = sqlTemplate(strings, ...values);
-  const resultSet = client.execute({
-    sql: query.sql,
-    args: query.values as InArgs,
-  } as InStatement);
-  return resultSet as Promise<ResultSet<T>>;
+  try {
+    const resultSet = await client.execute({
+      sql: query.sql,
+      args: query.values as InArgs,
+    });
+    return resultSet as ResultSet<T>;
+  } catch (error) {
+    throw new Error(`Query execution failed: ${error}`);
+  }
 }
 
-function validate(schema: ZodSchema, resultSet: ResultSet<Value>) {
+async function executeWithSchema<T>(
+  client: Client,
+  schema: ZodSchema<T>,
+  strings: TemplateStringsArray,
+  ...values: Value[]
+): Promise<ResultSet<T>> {
+  const resultSet = await execute<T>(client, strings, ...values);
+  validateResultSet(schema, resultSet);
+  return resultSet;
+}
+
+function validateResultSet<T>(
+  schema: ZodSchema<T>,
+  resultSet: ResultSet<any>
+): void {
   if (resultSet.rows.length > 0) {
     const validation = schema.safeParse(resultSet.rows[0]);
     if (!validation.success) {
@@ -99,4 +106,4 @@ function validate(schema: ZodSchema, resultSet: ResultSet<Value>) {
 }
 
 export { createClient, createSql };
-export type { Value };
+export type { Value, SqlFunction, SqlExecutor, ResultSet };

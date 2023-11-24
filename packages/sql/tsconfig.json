@@ -1,21 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "outDir": "./dist",
-    "declaration": true,
-    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@destacks/sql": [
+        "./src/index"
+      ],
+      "@destacks/sql/react": [
+        "./src/react"
+      ]
+    },
     "esModuleInterop": true,
+    "target": "ES6",
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": true,
+    "moduleResolution": "Bundler",
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "strict": true,
+    "outDir": "dist/",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "useDefineForClassFields": true,
+    "module": "ESNext",
   },
   "include": [
     "**/*.ts",
   ],
   "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts"
+    "node_modules/",
+    "dist/"
   ]
 }
