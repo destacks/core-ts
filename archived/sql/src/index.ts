@@ -6,7 +6,7 @@ import {
   Value,
   InArgs,
 } from "@libsql/client";
-import sqlTemplate, { Sql } from "sql-template-tag";
+import sqlTemplate from "sql-template-tag";
 
 type ResultSet<T> = Omit<_ResultSet, "rows"> & { rows: T[] };
 
@@ -52,11 +52,10 @@ function createSql(client: Client): SqlFunction {
     ...values: Value[]
   ): SqlExecutor<T> | Promise<ResultSet<T>> {
     if (schemaOrStrings instanceof ZodSchema) {
-      return function (strings, ...values) {
+      return (strings, ...values) =>
         executeWithSchema(client, schemaOrStrings, strings, ...values);
-      } as SqlExecutor<T>;
     } else {
-      return execute<T>(client, schemaOrStrings, ...values);
+      return execute(client, schemaOrStrings, ...values);
     }
   } as SqlFunction;
 }
