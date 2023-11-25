@@ -1,7 +1,7 @@
 {
   "name": "@destacks/sql",
-  "version": "0.1.5",
-  "description": "Simple SQL Querying Using Template Literals With Optional Zod Schema Validation",
+  "version": "0.2.0",
+  "description": "Archived: Simple SQL querying using template literals with optional Zod schema validation.",
   "keywords": [
     "database",
     "sql",
@@ -10,8 +10,7 @@
     "libsql",
     "turso"
   ],
-  "homepage": "https://github.com/destacks/core-ts/tree/main/packages/sql",
-  "bugs": "https://github.com/destacks/core-ts/issues",
+  "homepage": "https://github.com/destacks/core-ts/tree/main/archived/sql",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/destacks/core-ts.git"

@@ -1,4 +1,6 @@
-# `@destacks/sql`
+# :warning: ATTENTION: THIS PACKAGE HAS UNSOLVED PROBLEMS, IS THEREFORE ABANDONED, AND ARCHIVED. BETTER DON'T USE IT.
+
+## `@destacks/sql`
 
 **Simple SQL querying using template literals with optional Zod schema validation.**
 
@@ -25,7 +27,7 @@ npm i @destacks/sql
 
 #### Creating a Database Client
 
-```typescript
+```javascript
 import { createClient } from "@destacks/sql";
 
 // For a local SQLite database
@@ -58,7 +60,7 @@ sql(UserSchema)`SELECT * FROM users WHERE id = ${userId}`;
 
 Without schema validation:
 
-```typescript
+```javascript
 sql`SELECT * FROM users WHERE id = ${userId}`;
 ```
 
@@ -74,11 +76,29 @@ sql`SELECT * FROM users WHERE id = ${userId}`;
 
 ### React Project Import
 
-```typescript
+```javascript
 import { createClient, createSql } from "@destacks/sql/react";
 ```
 
 For more information on how `server-cli-only` works and its integration, refer to the [server-cli-only npm package](https://www.npmjs.com/package/server-cli-only).
+
+### Integrating `@destacks/sql` with Next.js
+
+To integrate `@destacks/sql` into your Next.js project, you need to update your Next.js configuration. This involves adding `@destacks/sql` to the `serverComponentsExternalPackages` array under the `experimental` key in your `next.config.js` file. Here's how you can do it:
+
+```javascript
+// next.config.js
+
+const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ["@destacks/sql"],
+  },
+};
+
+module.exports = nextConfig;
+```
+
+This configuration ensures that @destacks/sql is recognized and properly handled by the Next.js framework, particularly when dealing with server components.
 
 ## More Information
 

@@ -1,6 +1,6 @@
 {
   "name": "core-ts",
-  "description": "Essential JS/TS Packages for Our Work at Destacks.",
+  "description": "Essential JS/TS packages for our work.",
   "workspaces": [
     "packages/*"
   ],
