@@ -2,7 +2,8 @@
   "name": "core-ts",
   "description": "Essential JS/TS packages for our work.",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "archived/*"
   ],
   "author": "Alexis Michaltsis",
   "license": "MIT"
