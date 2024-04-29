@@ -1,6 +1,6 @@
 # server-cli-only
 
-The `server-cli-only` package is designed to restrict the import of modules exclusively to React Server Components or scripts running in the CLI. This package is an alternative to the `server-only` package, which does not permit the execution of scripts that use modules importing its directive.
+This package is designed only to allow imports from React Server Components and modules used in other server- and edge runtimes. If imported from a browser runtime, it throws an error (React Client Components). It is an alternative to the `server-only` package, which only permits the execution of React Server Components runtimes but doesn't allow using other server or edge runtimes.
 
 ## Installation
 
@@ -8,41 +8,58 @@ The `server-cli-only` package is designed to restrict the import of modules excl
 npm i server-cli-only
 ```
 
-## Usage
+## App Usage
 
-Import server-cli-only at the beginning of your module:
+Import `server-cli-only` at the beginning of a module that you want to protect from leaking to the front end:
 
 ```typescript
 import "server-cli-only";
 ```
 
+Now, imports in "browser" modules (e. g. React Client Components) will throw an error.
+
 ## CLI Usage
 
-To use this package in a CLI script, in addition to `import "server-cli-only"`, set the `RUNNING_IN_CLI` environment variable to `true`. Setting the environment variable can be done inline when running your script directly from the terminal:
+You can directly execute scripts in server runtimes like `node`, `deno`, and `bun`, for example:
 
 ```bash
-RUNNING_IN_CLI=true node your-script.js
+node your-script.js
 ```
 
-Or using a package.json script:
+Or in your `package.json`:
 
 ```json
 {
   "scripts": {
-    "your-cli-script": "RUNNING_IN_CLI=true node your-script.js"
+    "your-cli-script": "node your-script.js"
   }
 }
 ```
 
-## How It Works
+## Context
 
-The `server-cli-only` package is tailored for React Server Components and CLI environments, safeguarding against its inclusion in client-side components.
+This package tries to align with the guidelines in the React Server Module Conventions of [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md) but extends them to also allow execution in other server and edge runtimes. The goal is to restrict modules with sensitive data from being leaked to the front end.
 
-- **React Server Environments:** Utilizes an empty module (`./empty.js`) in environments specified by the `"react-server"` environment. For more details, see [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md).
-- **CLI Environments:** In Node.js contexts (`"node"` in `"default"` export environments), it checks if `RUNNING_IN_CLI` is set to `"true"`. If not, it throws an error, guiding for correct CLI usage.
-- **Client Component Environments:** In browser contexts (`"browser"` in `"default"` export environments), `./index.js` throws an error to always prevent usage in client-side rendering.
+### Allowed Runtimes
 
-This configuration tries to align with the guidelines in the React Server Module Conventions of [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md) but slightly extends them to enable script use on the CLI.
+| Key          | Target                  |
+| ------------ | ----------------------- |
+| react-server | React Server Components |
+| node         | Node.js runtime         |
+| bun          | Bun runtime             |
+| deno         | Deno runtime            |
+| edge-light   | Vercel edge             |
+| netlify      | Netlify edge            |
+| workerd      | Cloudflare edge         |
+
+### Forbidden Runtimes
+
+| Key         | Target                  |
+| ----------- | ----------------------- |
+| browser     | React Client Components |
+| \<unknown\> | All unknown evironments |
+
+[Proposed Specs](https://runtime-keys.proposal.wintercg.org/) concerning the different runtime keys available by the [Web-interoperable Runtimes Community Group (WinterCG)](https://wintercg.org). And React-DOM's [package.json `exports` field](https://github.com/facebook/react/blob/main/packages/react-dom/package.json).
 
 ## License
 

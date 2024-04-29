@@ -1,6 +1,6 @@
 {
   "name": "server-cli-only",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "The server-cli-only package is designed to restrict the import of modules exclusively to React Server Components or scripts running on the CLI.",
   "homepage": "https://github.com/destacks/core-ts/tree/main/packages/server-cli-only",
   "bugs": "https://github.com/destacks/core-ts/issues",
@@ -16,18 +16,23 @@
   "author": "Alexis Michaltsis",
   "license": "MIT",
   "files": [
-    "index.js",
-    "empty.js",
-    "cli.js"
+    "error.main.js",
+    "error.browser.js",
+    "error.default.js",
+    "pass.js"
   ],
-  "main": "index.js",
+  "main": "error.main.js",
   "exports": {
     ".": {
-      "react-server": "./empty.js",
-      "default": {
-        "browser": "./index.js",
-        "node": "./cli.js"
-      }
+      "react-server": "./pass.js",
+      "node": "./pass.js",
+      "bun": "./pass.js",
+      "deno": "./pass.js",
+      "edge-light": "./pass.js",
+      "netlify": "./pass.js",
+      "workerd": "./pass.js",
+      "browser": "./error.browser.js",
+      "default": "./error.default.js"
     }
   }
 }
