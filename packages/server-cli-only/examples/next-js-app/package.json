@@ -1,6 +1,6 @@
 {
   "name": "next-js-app-with-server-cli-only",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,14 +8,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "script": "RUNNING_IN_CLI=true npx tsx src/script.ts",
+    "script": "npx tsx src/script.ts",
     "script:fail": "npx tsx src/script.ts"
   },
   "dependencies": {
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18",
-    "server-cli-only": "^0.2.2"
+    "server-cli-only": "^0.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -17,8 +17,8 @@ export default function ClientPage() {
   return (
     <>
       <p className="rounded-xl border border-b border-gray-300 bg-gray-200 bg-gradient-to-b from-zinc-200 p-4 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:dark:bg-zinc-800/30">
-        If you can read this message, something went wrong. Loading this client
-        component page, which tries to load the following string{" "}
+        If you can read this message, something went wrong. Loading this Client
+        Component Page, which tries to load the following string{" "}
         <Code>
           &quot;
           {data}&quot;
