@@ -1,6 +1,6 @@
 # server-cli-only
 
-This package is designed as a failsafe only to allow imports into React Server Components and other server and edge runtime modules. All modules marked with `import "server-cli-only"` will throw an error on build-time if imported into a module running in the "browser" runtime (e.g., React Client Components). This package is an alternative to the `server-only` package, which permits the execution of React Server Components runtimes but doesn't allow using other server or edge runtimes. This package aims for the use with React but can also be used in other projects that follow this strategy.
+This package is designed as a failsafe. All modules marked with `import "server-cli-only"` will throw an error on build-time if imported into a module running in the "browser" runtime (e.g., React Client Components). This package is an alternative to the `server-only` package, which permits the execution of React Server Components runtimes but doesn't allow using other server or edge runtimes. This package aims for the use with React but can also be used in other projects that follow this strategy.
 
 ## Installation
 
