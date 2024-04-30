@@ -15,7 +15,7 @@
     "next": "14.2.2",
     "react": "^18",
     "react-dom": "^18",
-    "server-cli-only": "^0.3.0"
+    "server-cli-only": "^0.3.2"
   },
   "devDependencies": {
     "@types/node": "^20",
