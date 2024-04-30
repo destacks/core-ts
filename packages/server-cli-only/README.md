@@ -38,7 +38,7 @@ Or in your `package.json`:
 
 ## Context
 
-This package tries to align with the guidelines in the React Server Module Conventions of [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md) but extends this guideline to also allow executions in other server and edge runtimes, not only the "react-server" runtime. The overarching goal is to restrict modules with sensitive data from being leaked to the front-end (browser) by using ["conditional exports"](https://nodejs.org/api/packages.html#conditional-exports) in Node.js's `package.json` file. Doing so results in build-time errors for "browser" and unknown runtime modules. Following, all allowed and dis-allowed (error-throwing) runtimes.
+This package tries to align with the guidelines in the React Server Module Conventions of [RFC #227](https://github.com/reactjs/rfcs/blob/main/text/0227-server-module-conventions.md) but extends this guideline to also allow executions in other server and edge runtimes, not only the "react-server" runtime. The overarching goal is to restrict modules with sensitive data from being leaked to the front-end (browser) by using ["conditional exports"](https://nodejs.org/api/packages.html#conditional-exports) in Node.js's `package.json` file. Doing so results in build-time errors for "browser" and unknown runtime modules. Following, all allowed and forbidden (error-throwing) runtimes.
 
 ### Allowed Runtimes
 
@@ -52,7 +52,7 @@ This package tries to align with the guidelines in the React Server Module Conve
 | netlify      | Netlify edge            |
 | workerd      | Cloudflare edge         |
 
-### Forbidden Runtimes
+### Forbidden Runtimes (Error-Throwing)
 
 | Key         | Target                  |
 | ----------- | ----------------------- |
